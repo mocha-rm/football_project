@@ -16,7 +16,6 @@ public class ReservationServiceImpl implements ReservationService {
     private final ReservationRepository reservationRepository;
     private final UserService userService;
     private final StadiumService stadiumService;
-    private final StadimRepository stadiumRepository;
 
     @Transactional
     @Override
@@ -33,7 +32,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .name(requestDto.getName())
                 .fee(requestDto.getFee())
                 .user(user)
-                .stadium(requestDto.getStadium())
+                .stadium(stadium)
                 .build();
 
         reservationRepository.save(reservation);
