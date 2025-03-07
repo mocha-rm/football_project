@@ -32,7 +32,7 @@ public class SessionAuthenticationService {
     }
 
     /**
-     * 유저 역할 반한
+     * 유저 역할 반환
      * @return 유저의 역할
      */
     public UserRole getUserRole() {
