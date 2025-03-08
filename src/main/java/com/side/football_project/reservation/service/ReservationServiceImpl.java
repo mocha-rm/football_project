@@ -1,6 +1,8 @@
 package com.side.football_project.reservation.service;
 
+import com.side.football_project.domain.user.dto.UserResponseDto;
 import com.side.football_project.domain.user.entity.User;
+import com.side.football_project.domain.user.service.UserService;
 import com.side.football_project.reservation.domain.Reservation;
 import com.side.football_project.reservation.dto.ReservationRequestDto;
 import com.side.football_project.reservation.dto.ReservationResponseDto;
@@ -21,7 +23,7 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public ReservationResponseDto createReservation(ReservationRequestDto requestDto) {
 
-        User user = userService.findById(requestDto.getUser().getId());
+        UserResponseDto user = userService.findUser(requestDto.getUser().getId());
         Stadium stadium = stadiumService.findByIdWithLock(requestDto.getStadium().getId());
 
         if (stadium.isFullyBooked()) {
@@ -31,7 +33,7 @@ public class ReservationServiceImpl implements ReservationService {
         Reservation reservation = Reservation.builder()
                 .name(requestDto.getName())
                 .fee(requestDto.getFee())
-                .user(user)
+                .user(UserResponseDto.toEntity(user))
                 .stadium(stadium)
                 .build();
 
