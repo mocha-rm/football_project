@@ -7,6 +7,8 @@ import com.side.football_project.domain.user.entity.User;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
+import java.util.List;
+
 public interface UserService {
     UserResponseDto createUser(UserRequestDto requestDto);
 
@@ -23,4 +25,8 @@ public interface UserService {
     User getUserFromDB(Long userId);
 
     User getLoginUser();
+
+    void updateUserTier(Long userId);
+
+    List<User> getAllUser();
 }

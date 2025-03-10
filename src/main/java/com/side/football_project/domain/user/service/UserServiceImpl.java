@@ -5,6 +5,7 @@ import com.side.football_project.domain.user.dto.UserRequestDto;
 import com.side.football_project.domain.user.dto.UserResponseDto;
 import com.side.football_project.domain.user.entity.User;
 import com.side.football_project.domain.user.repository.UserRepository;
+import com.side.football_project.domain.user.type.UserTier;
 import com.side.football_project.global.common.exception.CustomException;
 import com.side.football_project.global.common.exception.type.UserErrorCode;
 import com.side.football_project.global.security.auth.CustomUserDetails;
@@ -16,6 +17,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -99,6 +103,22 @@ public class UserServiceImpl implements UserService {
         return "성공적으로 탈퇴처리 되었습니다.";
     }
 
+    /**
+     * 유저의 평균 평점을 기반으로 UserTier 업데이트
+     */
+    @Transactional
+    @Override
+    public void updateUserTier(Long userId) {
+        User user = getUserFromDB(userId);
+        Double avgRate = userRepository.findAvgRateByUserId(userId);
+
+        // 평점이 없는 경우 기본값 설정
+        UserTier newTier = (avgRate == null) ? UserTier.ROOKIE : UserTier.determineTier(avgRate);
+        user.updateTier(newTier);
+        userRepository.save(user);
+    }
+
+
 
     @Override
     public User getUserFromDB(Long userId) {
@@ -112,6 +132,11 @@ public class UserServiceImpl implements UserService {
         CustomUserDetails principal = (CustomUserDetails) authentication.getPrincipal();
 
         return principal.getUser();
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userRepository.findAll();
     }
 
     private void validatePassword(String rawPassword, String encodedPassword) {
