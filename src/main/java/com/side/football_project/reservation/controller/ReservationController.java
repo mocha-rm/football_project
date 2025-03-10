@@ -1,9 +1,11 @@
 package com.side.football_project.reservation.controller;
 
+import com.side.football_project.reservation.dto.ReservationDeleteRequestDto;
 import com.side.football_project.reservation.dto.ReservationRequestDto;
 import com.side.football_project.reservation.dto.ReservationResponseDto;
 import com.side.football_project.reservation.service.ReservationService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.websocket.server.PathParam;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
@@ -17,17 +19,17 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<ReservationResponseDto> createReservation(@RequestBody ReservationRequestDto requestDto, HttpServletRequest request) {
-        return ResponseEntity.ok(reservationService.createReservation(requestDto, request));
+    public ResponseEntity<ReservationResponseDto> createReservation(@RequestBody ReservationRequestDto requestDto) {
+        return ResponseEntity.ok(reservationService.createReservation(requestDto));
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ReservationResponseDto> findReservation(@RequestParam Long id) {
+    public ResponseEntity<ReservationResponseDto> findReservation(@PathVariable Long id) {
         return ResponseEntity.ok(reservationService.findReservation(id));
     }
 
     @GetMapping("/stadiums/{id}")
-    public ResponseEntity<Page<ReservationResponseDto>> findReservation(@RequestParam Long id,
+    public ResponseEntity<Page<ReservationResponseDto>> findReservation(@PathVariable Long id,
                                                                         @RequestParam(defaultValue = "0") int page,
                                                                         @RequestParam(defaultValue = "10") int size) {
         Page<ReservationResponseDto> reservation = reservationService.findAllReservationByStadium(id, page, size);
@@ -39,17 +41,17 @@ public class ReservationController {
         return ResponseEntity.ok(reservationService.findReservationByStadium(id));
     }
 
-    @GetMapping("/user/{id}")
-    public ResponseEntity<Page<ReservationResponseDto>> findReservationByUser(@RequestParam Long id,
-                                                                             @RequestParam(defaultValue = "0") int page,
-                                                                             @RequestParam(defaultValue = "10") int size) {
-        Page<ReservationResponseDto> reservation = reservationService.findReservationByUser(id, page, size);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<Page<ReservationResponseDto>> findReservationByUser(@PathVariable Long userId,
+                                                                              @RequestParam(defaultValue = "0") int page,
+                                                                              @RequestParam(defaultValue = "10") int size) {
+        Page<ReservationResponseDto> reservation = reservationService.findReservationByUser(userId, page, size);
         return ResponseEntity.ok(reservation);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteReservation(@RequestParam Long id) {
-        reservationService.deleteReservation(id);
+    public ResponseEntity<Void> deleteReservation(@RequestBody ReservationDeleteRequestDto requestDto) {
+        reservationService.deleteReservation(requestDto);
         return ResponseEntity.noContent().build();
     }
 }
