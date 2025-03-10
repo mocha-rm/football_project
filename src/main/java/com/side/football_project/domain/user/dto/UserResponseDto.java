@@ -51,4 +51,14 @@ public class UserResponseDto {
                 user.getCreatedAt()
         );
     }
+
+    public static User toEntity(UserResponseDto userResponseDto) {
+        return User.builder()
+                .email(userResponseDto.getEmail())
+                .name(userResponseDto.getName())
+                .phoneNumber(userResponseDto.getPhoneNumber())
+                .age(userResponseDto.getAge())
+                .role(userResponseDto.getUserRole())
+                .build();
+    }
 }
