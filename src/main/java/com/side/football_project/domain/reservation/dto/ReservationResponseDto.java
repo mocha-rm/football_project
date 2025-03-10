@@ -1,7 +1,8 @@
-package com.side.football_project.reservation.dto;
+package com.side.football_project.domain.reservation.dto;
 
+import com.side.football_project.domain.stadium.entity.Stadium;
 import com.side.football_project.domain.user.entity.User;
-import com.side.football_project.reservation.domain.Reservation;
+import com.side.football_project.domain.reservation.domain.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
