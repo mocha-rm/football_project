@@ -1,5 +1,7 @@
 package com.side.football_project.reservation.repository;
 
+import com.side.football_project.global.common.exception.CustomException;
+import com.side.football_project.global.common.exception.type.ReservationErrorCode;
 import com.side.football_project.reservation.domain.Reservation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +24,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
 
     default Reservation findReservation(Long id) {
-        return findById(id).orElseThrow(() -> new IllegalArgumentException("해당 예약이 없습니다. id=" + id));
+        return findById(id).orElseThrow(() -> new CustomException(ReservationErrorCode.RESERVATION_NOT_FOUND));
     }
 }

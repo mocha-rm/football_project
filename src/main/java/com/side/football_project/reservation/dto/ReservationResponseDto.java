@@ -1,5 +1,6 @@
 package com.side.football_project.reservation.dto;
 
+import com.side.football_project.domain.stadium.entity.Stadium;
 import com.side.football_project.domain.user.entity.User;
 import com.side.football_project.reservation.domain.Reservation;
 import lombok.Builder;
@@ -30,6 +31,15 @@ public class ReservationResponseDto {
     public static ReservationResponseDto toEntity(Reservation reservation) {
         return ReservationResponseDto.builder()
                 .id(reservation.getId())
+                .name(reservation.getName())
+                .fee(reservation.getFee())
+                .user(reservation.getUser())
+                .stadium(reservation.getStadium())
+                .build();
+    }
+
+    public static Reservation toDto(ReservationResponseDto reservation) {
+        return Reservation.builder()
                 .name(reservation.getName())
                 .fee(reservation.getFee())
                 .user(reservation.getUser())

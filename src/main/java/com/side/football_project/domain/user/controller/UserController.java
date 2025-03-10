@@ -56,4 +56,15 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@RequestBody UserRequestDto requestDto, HttpSession session) {
         return new ResponseEntity<>(userService.deleteUser(requestDto, session), HttpStatus.OK);
     }
+
+    /**
+     * 유저 티어 업데이트
+     * @param userId 유저 ID
+     * @return 티어 업데이트 완료 메시지
+     */
+    @PatchMapping("/users/{userId}/tier")
+    public ResponseEntity<String> updateTier(@PathVariable Long userId) {
+        userService.updateUserTier(userId);
+        return ResponseEntity.ok("유저 티어가 업데이트 되었습니다.");
+    }
 }
