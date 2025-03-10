@@ -1,13 +1,10 @@
-package com.side.football_project.domain.reservation.service;
+package com.side.football_project.reservation.service;
 
-import com.side.football_project.domain.stadium.entity.Stadium;
-import com.side.football_project.domain.stadium.service.StadiumService;
 import com.side.football_project.domain.user.entity.User;
-import com.side.football_project.domain.user.service.UserService;
-import com.side.football_project.domain.reservation.domain.Reservation;
-import com.side.football_project.domain.reservation.dto.ReservationRequestDto;
-import com.side.football_project.domain.reservation.dto.ReservationResponseDto;
-import com.side.football_project.domain.reservation.repository.ReservationRepository;
+import com.side.football_project.reservation.domain.Reservation;
+import com.side.football_project.reservation.dto.ReservationRequestDto;
+import com.side.football_project.reservation.dto.ReservationResponseDto;
+import com.side.football_project.reservation.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
