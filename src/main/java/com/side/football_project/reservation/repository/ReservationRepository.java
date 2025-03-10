@@ -1,7 +1,27 @@
 package com.side.football_project.reservation.repository;
 
 import com.side.football_project.reservation.domain.Reservation;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.Optional;
+
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+
+    @Query("SELECT r FROM Reservation r WHERE r.stadium.id = :stadiumId ORDER BY r.createdAt DESC")
+    Page<Reservation> findReservationByStadium(Long stadiumId, Pageable pageable);
+
+    @Query("SELECT r FROM Reservation r JOIN FETCH r.user where r.user.id = :userId ORDER BY r.createdAt DESC")
+    Page<Reservation> findReservationByUser(Long userId, Pageable pageable);
+
+    @Query("select r from Reservation r JOIN FETCH r.stadium where r.stadium.id = :stadiumId")
+    Optional<Reservation> findReservationByStadiumId(Long stadiumId);
+
+
+    default Reservation findReservation(Long id) {
+        return findById(id).orElseThrow(() -> new IllegalArgumentException("해당 예약이 없습니다. id=" + id));
+    }
 }
