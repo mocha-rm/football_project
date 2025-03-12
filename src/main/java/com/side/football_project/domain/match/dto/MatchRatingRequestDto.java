@@ -1,4 +1,4 @@
-package com.side.football_project.match.dto;
+package com.side.football_project.domain.match.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

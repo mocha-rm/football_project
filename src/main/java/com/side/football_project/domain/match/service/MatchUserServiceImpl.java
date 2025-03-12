@@ -1,19 +1,20 @@
-package com.side.football_project.match.service;
+package com.side.football_project.domain.match.service;
 
+import com.side.football_project.domain.match.domain.Match;
+import com.side.football_project.domain.match.domain.MatchUser;
+import com.side.football_project.domain.match.dto.MatchRatingRequestDto;
+import com.side.football_project.domain.match.dto.MatchRequestDto;
+import com.side.football_project.domain.match.dto.MatchResponseDto;
+import com.side.football_project.domain.match.repository.MatchRepository;
+import com.side.football_project.domain.match.repository.MatchUserRepository;
 import com.side.football_project.domain.user.entity.User;
 import com.side.football_project.domain.user.service.UserService;
 import com.side.football_project.domain.user.type.UserRole;
 import com.side.football_project.global.common.exception.CustomException;
 import com.side.football_project.global.common.exception.type.UserErrorCode;
-import com.side.football_project.match.domain.Match;
-import com.side.football_project.match.domain.MatchUser;
-import com.side.football_project.match.dto.MatchRatingRequestDto;
-import com.side.football_project.match.dto.MatchRequestDto;
-import com.side.football_project.match.dto.MatchResponseDto;
-import com.side.football_project.match.repository.MatchRepository;
-import com.side.football_project.match.repository.MatchUserRepository;
-import com.side.football_project.reservation.dto.ReservationResponseDto;
-import com.side.football_project.reservation.service.ReservationService;
+
+import com.side.football_project.domain.reservation.dto.ReservationResponseDto;
+import com.side.football_project.domain.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

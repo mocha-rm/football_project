@@ -1,4 +1,4 @@
-package com.side.football_project.reservation.domain;
+package com.side.football_project.domain.reservation.domain;
 
 import com.side.football_project.domain.stadium.entity.Stadium;
 import com.side.football_project.domain.user.entity.User;

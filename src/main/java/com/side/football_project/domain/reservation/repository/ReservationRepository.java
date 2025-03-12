@@ -1,8 +1,8 @@
-package com.side.football_project.reservation.repository;
+package com.side.football_project.domain.reservation.repository;
 
 import com.side.football_project.global.common.exception.CustomException;
 import com.side.football_project.global.common.exception.type.ReservationErrorCode;
-import com.side.football_project.reservation.domain.Reservation;
+import com.side.football_project.domain.reservation.domain.Reservation;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

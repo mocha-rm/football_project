@@ -1,6 +1,7 @@
-package com.side.football_project.match.repository;
+package com.side.football_project.domain.match.repository;
 
-import com.side.football_project.match.domain.MatchUser;
+
+import com.side.football_project.domain.match.domain.MatchUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
