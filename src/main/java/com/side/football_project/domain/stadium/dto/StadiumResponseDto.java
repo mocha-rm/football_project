@@ -14,14 +14,16 @@ public class StadiumResponseDto {
     private String name;
     private StadiumStatus status;
     private String description;
+    private Integer capacity;
     private User user;
 
     @Builder
-    public StadiumResponseDto(Long id, String name, StadiumStatus status, String description, User user) {
+    public StadiumResponseDto(Long id, String name, StadiumStatus status, String description,Integer capacity, User user) {
         this.id = id;
         this.name = name;
         this.status = status;
         this.description = description;
+        this.capacity = capacity;
         this.user = user;
     }
 
@@ -31,6 +33,7 @@ public class StadiumResponseDto {
                 .name(stadium.getName())
                 .status(stadium.getStatus())
                 .description(stadium.getDescription())
+                .capacity(stadium.getCapacity())
                 .user(stadium.getUser())
                 .build();
     }
