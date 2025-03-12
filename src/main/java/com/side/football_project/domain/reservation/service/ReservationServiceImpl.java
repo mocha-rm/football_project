@@ -1,4 +1,4 @@
-package com.side.football_project.reservation.service;
+package com.side.football_project.domain.reservation.service;
 
 import com.side.football_project.domain.stadium.entity.Stadium;
 import com.side.football_project.domain.stadium.service.StadiumService;
@@ -7,11 +7,11 @@ import com.side.football_project.domain.user.service.UserService;
 import com.side.football_project.global.common.exception.CustomException;
 import com.side.football_project.global.common.exception.type.ReservationErrorCode;
 import com.side.football_project.global.common.exception.type.UserErrorCode;
-import com.side.football_project.reservation.domain.Reservation;
-import com.side.football_project.reservation.dto.ReservationDeleteRequestDto;
-import com.side.football_project.reservation.dto.ReservationRequestDto;
-import com.side.football_project.reservation.dto.ReservationResponseDto;
-import com.side.football_project.reservation.repository.ReservationRepository;
+import com.side.football_project.domain.reservation.domain.Reservation;
+import com.side.football_project.domain.reservation.dto.ReservationDeleteRequestDto;
+import com.side.football_project.domain.reservation.dto.ReservationRequestDto;
+import com.side.football_project.domain.reservation.dto.ReservationResponseDto;
+import com.side.football_project.domain.reservation.repository.ReservationRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -35,7 +35,7 @@ public class ReservationServiceImpl implements ReservationService {
 
         User user = userService.getLoginUser();
         User findUser = userService.getUserFromDB(user.getId());
-        Stadium stadium = stadiumService.findByIdWithLock(requestDto.getStadium().getId());
+        Stadium stadium = stadiumService.findByIdWithLock(requestDto.getStadiumId());
 
         if (stadium.isFullyBooked()) {
             throw new IllegalStateException("이미 예약이 완료된 경기장입니다.");
@@ -49,6 +49,7 @@ public class ReservationServiceImpl implements ReservationService {
                 .build();
 
         reservationRepository.save(reservation);
+        stadium.increaseCurrentReservationCount();
 
         return ReservationResponseDto.toEntity(reservation);
     }
@@ -94,6 +95,9 @@ public class ReservationServiceImpl implements ReservationService {
             throw new CustomException(UserErrorCode.USER_NOT_MATCH);
         }
 
+        Stadium stadium = reservation.getStadium();
+
         reservationRepository.delete(reservation);
+        stadium.decreaseCurrentReservationCount();
     }
 }
