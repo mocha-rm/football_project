@@ -23,13 +23,12 @@ public class StadiumServiceImpl implements StadiumService {
     private final StadiumRepository stadiumRepository;
     private final UserService userService;
 
-
-    //Address request에 추가 및 수정
     @Transactional
     @Override
     public StadiumResponseDto createStadium(StadiumRequestDto requestDto) {
         User user = userService.getLoginUser();
-        if (user.getRole() != UserRole.VENDOR) {
+        User findUser =userService.getUserFromDB(user.getId());
+        if (findUser.getRole() != UserRole.VENDOR) {
             throw new IllegalStateException("구장 사업주가 아닙니다.");
         }
 
@@ -37,6 +36,7 @@ public class StadiumServiceImpl implements StadiumService {
                 .name(requestDto.getName())
                 .status(StadiumStatus.AVAILABLE)
                 .description(requestDto.getDescription())
+                .capacity(requestDto.getCapacity())
                 .user(user)
                 .build();
 
@@ -55,7 +55,8 @@ public class StadiumServiceImpl implements StadiumService {
 
     @Override
     public StadiumUpdateDto updateStadium(StadiumUpdateDto requestDto) {
-        User findUser = userService.getLoginUser();
+        User user = userService.getLoginUser();
+        User findUser =userService.getUserFromDB(user.getId());
         Stadium stadium = stadiumRepository.findById(requestDto.getId()).orElseThrow(() -> new IllegalStateException("경기장을 조회할 수 없습니다."));
 
         if(!Objects.equals(findUser.getId(), stadium.getUser().getId())) {
@@ -66,6 +67,7 @@ public class StadiumServiceImpl implements StadiumService {
                 .name(requestDto.getName())
                 .status(StadiumStatus.AVAILABLE)
                 .description(requestDto.getDescription())
+                .capacity(requestDto.getCapacity())
                 .user(findUser)
                 .build();
 

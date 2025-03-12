@@ -5,7 +5,6 @@ import com.side.football_project.domain.stadium.dto.StadiumResponseDto;
 import com.side.football_project.domain.stadium.dto.StadiumUpdateDto;
 import com.side.football_project.domain.stadium.service.StadiumService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,18 +16,18 @@ public class StadiumController {
 
     @PostMapping
     public ResponseEntity<StadiumResponseDto> createStadium(@RequestBody StadiumRequestDto requestDto) {
-        return new ResponseEntity<>(stadiumService.createStadium(requestDto), HttpStatus.OK);
+        return ResponseEntity.ok(stadiumService.createStadium(requestDto));
     }
 
     @GetMapping({"/{id}"})
     public ResponseEntity<StadiumResponseDto> findStadium(@PathVariable Long id) {
-        return new ResponseEntity<>(stadiumService.findStadium(id), HttpStatus.OK);
+        return ResponseEntity.ok(stadiumService.findStadium(id));
     }
 
     @PatchMapping
     public ResponseEntity<StadiumUpdateDto> updateStadium(
             @RequestBody StadiumUpdateDto requestDto) {
-        return new ResponseEntity<>(stadiumService.updateStadium(requestDto), HttpStatus.OK);
+        return ResponseEntity.ok(stadiumService.updateStadium(requestDto));
     }
 
     @DeleteMapping("/{id}")
