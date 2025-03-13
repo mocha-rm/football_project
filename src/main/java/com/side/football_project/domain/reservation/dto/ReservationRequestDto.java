@@ -1,4 +1,4 @@
-package com.side.football_project.reservation.dto;
+package com.side.football_project.domain.reservation.dto;
 
 import com.side.football_project.domain.stadium.entity.Stadium;
 import com.side.football_project.domain.user.entity.User;
@@ -14,12 +14,12 @@ public class ReservationRequestDto {
     private String name;
     private BigDecimal fee;
     private User user;
-    private Stadium stadium;
+    private Long stadiumId;
 
-    public ReservationRequestDto(String name, BigDecimal fee, User user, Stadium stadium) {
+    public ReservationRequestDto(String name, BigDecimal fee, User user, Long stadiumId) {
         this.name = name;
         this.fee = fee;
         this.user = user;
-        this.stadium = stadium;
+        this.stadiumId = stadiumId;
     }
 }

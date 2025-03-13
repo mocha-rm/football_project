@@ -1,4 +1,4 @@
-package com.side.football_project.match.domain;
+package com.side.football_project.domain.match.domain;
 
 import com.side.football_project.domain.user.entity.User;
 import jakarta.persistence.*;

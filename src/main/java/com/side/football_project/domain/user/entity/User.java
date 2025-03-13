@@ -1,9 +1,9 @@
 package com.side.football_project.domain.user.entity;
 
+import com.side.football_project.domain.match.domain.MatchUser;
 import com.side.football_project.domain.user.type.UserRole;
 import com.side.football_project.domain.user.type.UserTier;
 import com.side.football_project.global.common.entity.BaseEntity;
-import com.side.football_project.match.domain.MatchUser;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

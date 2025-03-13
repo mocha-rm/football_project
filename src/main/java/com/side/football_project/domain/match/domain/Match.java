@@ -1,7 +1,7 @@
-package com.side.football_project.match.domain;
+package com.side.football_project.domain.match.domain;
 
 import com.side.football_project.domain.stadium.entity.Stadium;
-import com.side.football_project.reservation.domain.Reservation;
+import com.side.football_project.domain.reservation.domain.Reservation;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;

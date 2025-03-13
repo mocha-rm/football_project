@@ -1,9 +1,10 @@
-package com.side.football_project.match.controller;
+package com.side.football_project.domain.match.controller;
 
-import com.side.football_project.match.dto.MatchRatingRequestDto;
-import com.side.football_project.match.dto.MatchRequestDto;
-import com.side.football_project.match.dto.MatchResponseDto;
-import com.side.football_project.match.service.MatchUserService;
+
+import com.side.football_project.domain.match.dto.MatchRatingRequestDto;
+import com.side.football_project.domain.match.dto.MatchRequestDto;
+import com.side.football_project.domain.match.dto.MatchResponseDto;
+import com.side.football_project.domain.match.service.MatchUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

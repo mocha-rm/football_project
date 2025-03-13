@@ -1,8 +1,8 @@
-package com.side.football_project.reservation.service;
+package com.side.football_project.domain.reservation.service;
 
-import com.side.football_project.reservation.dto.ReservationDeleteRequestDto;
-import com.side.football_project.reservation.dto.ReservationRequestDto;
-import com.side.football_project.reservation.dto.ReservationResponseDto;
+import com.side.football_project.domain.reservation.dto.ReservationDeleteRequestDto;
+import com.side.football_project.domain.reservation.dto.ReservationRequestDto;
+import com.side.football_project.domain.reservation.dto.ReservationResponseDto;
 import org.springframework.data.domain.Page;
 
 public interface ReservationService {

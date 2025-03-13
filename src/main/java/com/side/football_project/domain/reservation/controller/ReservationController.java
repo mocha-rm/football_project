@@ -1,11 +1,9 @@
-package com.side.football_project.reservation.controller;
+package com.side.football_project.domain.reservation.controller;
 
-import com.side.football_project.reservation.dto.ReservationDeleteRequestDto;
-import com.side.football_project.reservation.dto.ReservationRequestDto;
-import com.side.football_project.reservation.dto.ReservationResponseDto;
-import com.side.football_project.reservation.service.ReservationService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.websocket.server.PathParam;
+import com.side.football_project.domain.reservation.dto.ReservationDeleteRequestDto;
+import com.side.football_project.domain.reservation.dto.ReservationRequestDto;
+import com.side.football_project.domain.reservation.dto.ReservationResponseDto;
+import com.side.football_project.domain.reservation.service.ReservationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
