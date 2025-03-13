@@ -41,7 +41,7 @@ public class TeamServiceImpl implements TeamService {
     }
 
     @Override
-    public String updateTeam(Long teamId, TeamRequestDto requestDto) {
+    public void updateTeam(Long teamId, TeamRequestDto requestDto) {
         Team team = getTeamFromDB(teamId);
 
         validateAuthorization(team.getId());
@@ -49,19 +49,15 @@ public class TeamServiceImpl implements TeamService {
         team.updateTeamInfo(requestDto.getTeamName(), requestDto.getHeadCount());
 
         teamRepository.save(team);
-
-        return "팀 정보 수정이 완료되었습니다.";
     }
 
     @Override
-    public String deleteTeam(Long teamId) {
+    public void deleteTeam(Long teamId) {
         Team team = getTeamFromDB(teamId);
 
         validateAuthorization(team.getId());
 
         teamRepository.delete(team);
-
-        return "팀이 삭제되었습니다.";
     }
 
     @Override

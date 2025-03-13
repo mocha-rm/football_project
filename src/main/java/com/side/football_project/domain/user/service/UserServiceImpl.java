@@ -45,15 +45,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String login(UserRequestDto requestDto, HttpServletRequest request) {
+    public void login(UserRequestDto requestDto, HttpServletRequest request) {
         User user = userRepository.findByEmail(requestDto.getEmail())
                 .orElseThrow(() -> new CustomException(UserErrorCode.USER_NOT_FOUND));
 
         validatePassword(requestDto.getPassword(), user.getPassword());
 
         sessionAuthenticationService.authenticate(requestDto.getEmail(), requestDto.getPassword(), request);
-
-        return "로그인 성공 : 역할 - " + sessionAuthenticationService.getUserRole().name();
     }
 
     @Override
@@ -63,18 +61,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public String updateName(UserRequestDto requestDto) {
+    public void updateName(UserRequestDto requestDto) {
         User user = getLoginUser();
 
         user.updateName(requestDto.getName());
 
         userRepository.save(user);
-
-        return "이름이 수정되었습니다.";
     }
 
     @Override
-    public String updatePassword(UserPasswordUpdateDto passwordUpdateDto) {
+    public void updatePassword(UserPasswordUpdateDto passwordUpdateDto) {
         User user = getLoginUser();
 
         validatePassword(passwordUpdateDto.getCurrentPassword(), user.getPassword());
@@ -87,20 +83,16 @@ public class UserServiceImpl implements UserService {
 
         user.updatePassword(passwordEncoder.encode(passwordUpdateDto.getNewPassword()));
         userRepository.save(user);
-
-        return "비밀번호가 수정되었습니다.";
     }
 
     @Override
-    public String deleteUser(UserRequestDto requestDto, HttpSession session) {
+    public void deleteUser(UserRequestDto requestDto, HttpSession session) {
         User user = getLoginUser();
 
         validatePassword(requestDto.getPassword(), user.getPassword());
         userRepository.delete(user);
 
         clearSession(session);
-
-        return "성공적으로 탈퇴처리 되었습니다.";
     }
 
     /**

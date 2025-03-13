@@ -33,7 +33,8 @@ public class UserController {
      */
     @PutMapping
     public ResponseEntity<String> updateName(@RequestBody UserRequestDto requestDto) {
-        return new ResponseEntity<>(userService.updateName(requestDto), HttpStatus.OK);
+        userService.updateName(requestDto);
+        return ResponseEntity.ok("이름이 수정되었습니다.");
     }
 
     /**
@@ -43,7 +44,8 @@ public class UserController {
      */
     @PatchMapping
     public ResponseEntity<String> updatePassword(@RequestBody UserPasswordUpdateDto passwordUpdateDto) {
-        return new ResponseEntity<>(userService.updatePassword(passwordUpdateDto), HttpStatus.OK);
+        userService.updatePassword(passwordUpdateDto);
+        return ResponseEntity.ok("비밀번호가 수정되었습니다.");
     }
 
     /**
@@ -54,7 +56,8 @@ public class UserController {
      */
     @DeleteMapping
     public ResponseEntity<String> deleteUser(@RequestBody UserRequestDto requestDto, HttpSession session) {
-        return new ResponseEntity<>(userService.deleteUser(requestDto, session), HttpStatus.OK);
+        userService.deleteUser(requestDto, session);
+        return ResponseEntity.ok("성공적으로 탈퇴처리 되었습니다.");
     }
 
     /**

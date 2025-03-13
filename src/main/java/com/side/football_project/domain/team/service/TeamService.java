@@ -9,9 +9,9 @@ public interface TeamService {
 
     TeamResponseDto findTeam(Long teamId);
 
-    String updateTeam(Long teamId, TeamRequestDto requestDto);
+    void updateTeam(Long teamId, TeamRequestDto requestDto);
 
-    String deleteTeam(Long teamId);
+    void deleteTeam(Long teamId);
 
     Team getTeamFromDB(Long teamId);
 }
