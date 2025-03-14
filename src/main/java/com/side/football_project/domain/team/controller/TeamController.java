@@ -4,7 +4,6 @@ import com.side.football_project.domain.team.dto.TeamRequestDto;
 import com.side.football_project.domain.team.dto.TeamResponseDto;
 import com.side.football_project.domain.team.service.TeamService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +21,7 @@ public class TeamController {
      */
     @PostMapping
     public ResponseEntity<TeamResponseDto> createTeam(@RequestBody TeamRequestDto requestDto) {
-        return new ResponseEntity<>(teamService.createTeam(requestDto), HttpStatus.CREATED);
+        return ResponseEntity.ok(teamService.createTeam(requestDto));
     }
 
     /**
@@ -32,7 +31,7 @@ public class TeamController {
      */
     @GetMapping("/{teamId}")
     public ResponseEntity<TeamResponseDto> findTeam(@PathVariable Long teamId) {
-        return new ResponseEntity<>(teamService.findTeam(teamId), HttpStatus.OK);
+        return ResponseEntity.ok(teamService.findTeam(teamId));
     }
 
     /**
@@ -43,7 +42,8 @@ public class TeamController {
      */
     @PutMapping("/{teamId}")
     public ResponseEntity<String> updateTeam(@PathVariable Long teamId, @RequestBody TeamRequestDto requestDto) {
-        return new ResponseEntity<>(teamService.updateTeam(teamId, requestDto), HttpStatus.OK);
+        teamService.updateTeam(teamId, requestDto);
+        return ResponseEntity.ok("팀 정보 수정이 완료되었습니다.");
     }
 
     /**
@@ -53,6 +53,7 @@ public class TeamController {
      */
     @DeleteMapping("/{teamId}")
     public ResponseEntity<String> deleteTeam(@PathVariable Long teamId) {
-        return new ResponseEntity<>(teamService.deleteTeam(teamId), HttpStatus.OK);
+        teamService.deleteTeam(teamId);
+        return ResponseEntity.ok("팀이 삭제되었습니다.");
     }
 }

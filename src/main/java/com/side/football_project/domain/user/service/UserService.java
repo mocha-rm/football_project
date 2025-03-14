@@ -12,15 +12,15 @@ import java.util.List;
 public interface UserService {
     UserResponseDto createUser(UserRequestDto requestDto);
 
-    String login(UserRequestDto requestDto, HttpServletRequest request);
+    void login(UserRequestDto requestDto, HttpServletRequest request);
 
     UserResponseDto findUser(Long userId);
 
-    String updateName(UserRequestDto requestDto);
+    void updateName(UserRequestDto requestDto);
 
-    String updatePassword(UserPasswordUpdateDto passwordUpdateDto);
+    void updatePassword(UserPasswordUpdateDto passwordUpdateDto);
 
-    String deleteUser(UserRequestDto requestDto, HttpSession session);
+    void deleteUser(UserRequestDto requestDto, HttpSession session);
 
     User getUserFromDB(Long userId);
 
