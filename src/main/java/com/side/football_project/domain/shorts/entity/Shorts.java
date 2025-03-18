@@ -9,9 +9,11 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
 
 @Getter
 @Entity
+@DynamicUpdate
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Shorts extends BaseEntity {
     @Id
@@ -32,5 +34,10 @@ public class Shorts extends BaseEntity {
         this.title = title;
         this.description = description;
         this.url = url;
+    }
+
+    public void updateShorts(String title, String description) {
+        this.title = title;
+        this.description = description;
     }
 }

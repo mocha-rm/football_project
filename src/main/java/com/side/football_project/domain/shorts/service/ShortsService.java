@@ -1,11 +1,17 @@
 package com.side.football_project.domain.shorts.service;
 
+import com.side.football_project.domain.shorts.dto.ShortsRequestDto;
+import com.side.football_project.domain.shorts.dto.ShortsResponseDto;
+import com.side.football_project.domain.shorts.entity.Shorts;
+
 public interface ShortsService {
-    void createShorts();
+    ShortsResponseDto createShorts(ShortsRequestDto requestDto);
 
-    void findShorts();
+    ShortsResponseDto findShorts(Long id);
 
-    void updateShorts();
+    ShortsResponseDto updateShorts(Long id, ShortsRequestDto requestDto);
 
-    void deleteShorts();
+    void deleteShorts(Long id);
+
+    Shorts getShortsFromDB(Long id);
 }
