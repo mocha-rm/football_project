@@ -30,6 +30,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDto createUser(UserRequestDto requestDto) {
+        if (userRepository.findByEmail(requestDto.getEmail()).isPresent()) {
+            throw new CustomException(UserErrorCode.EMAIL_DUPLICATED);
+        }
+
         User user = User.builder()
                 .name(requestDto.getName())
                 .phoneNumber(requestDto.getPhoneNumber())
