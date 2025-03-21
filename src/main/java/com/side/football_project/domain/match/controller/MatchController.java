@@ -5,8 +5,11 @@ import com.side.football_project.domain.match.dto.MatchRatingRequestDto;
 import com.side.football_project.domain.match.dto.MatchRequestDto;
 import com.side.football_project.domain.match.dto.MatchResponseDto;
 import com.side.football_project.domain.match.service.MatchUserService;
+import com.side.football_project.domain.match.service.RandomService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +20,7 @@ import java.util.List;
 public class MatchController {
 
     private final MatchUserService matchUserService;
+    private final RandomService randomService;
 
     @PostMapping
     public ResponseEntity<MatchResponseDto> create(@RequestBody MatchRequestDto requestDto) {
@@ -34,5 +38,17 @@ public class MatchController {
     public ResponseEntity<String> complete(@PathVariable Long matchId) {
         matchUserService.completeMatch(matchId);
         return ResponseEntity.ok("경기가 종료되었습니다.");
+    }
+
+    @PostMapping("/join")
+    public ResponseEntity<Void> joinMatch(@RequestParam Long userId) {
+        randomService.joinMatch(userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/fill/{stadiumId}")
+    public ResponseEntity<Void> fillEmptySpot(@PathVariable Long stadiumId) {
+        randomService.fillEmptySpot(stadiumId);
+        return ResponseEntity.ok().build();
     }
 }

@@ -7,7 +7,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 
@@ -26,4 +28,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     default Reservation findReservation(Long id) {
         return findById(id).orElseThrow(() -> new CustomException(ReservationErrorCode.RESERVATION_NOT_FOUND));
     }
+
+    @Query("SELECT r FROM Reservation r WHERE r.stadium.id = :stadiumId")
+    List<Reservation> findAllByStadiumId(@Param("stadiumId") Long stadiumId);
+
+
 }
