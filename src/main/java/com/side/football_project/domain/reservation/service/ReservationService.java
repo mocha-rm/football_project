@@ -17,4 +17,5 @@ public interface ReservationService {
     Page<ReservationResponseDto> findReservationByUser(Long userId, int page, int size);
 
     void deleteReservation(ReservationDeleteRequestDto requestDto);
+
 }
