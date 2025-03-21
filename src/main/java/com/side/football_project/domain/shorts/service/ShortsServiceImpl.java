@@ -10,6 +10,10 @@ import com.side.football_project.global.common.exception.CustomException;
 import com.side.football_project.global.common.exception.type.ShortsErrorCode;
 import com.side.football_project.global.common.exception.type.UserErrorCode;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -38,6 +42,14 @@ public class ShortsServiceImpl implements ShortsService {
     public ShortsResponseDto findShorts(Long id) {
         Shorts shorts = getShortsFromDB(id);
         return ShortsResponseDto.toDto(shorts);
+    }
+
+    @Override
+    public Page<ShortsResponseDto> findShortsFeed(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdAt"));
+
+        Page<Shorts> shortsPage = shortsRepository.findAll(pageable);
+        return shortsPage.map(ShortsResponseDto::toDto);
     }
 
     @Override
