@@ -1,6 +1,7 @@
 package com.side.football_project.domain.user.entity;
 
 import com.side.football_project.domain.match.domain.MatchUser;
+import com.side.football_project.domain.shorts.entity.Shorts;
 import com.side.football_project.domain.user.type.UserRole;
 import com.side.football_project.domain.user.type.UserTier;
 import com.side.football_project.global.common.entity.BaseEntity;
@@ -40,8 +41,11 @@ public class User extends BaseEntity {
     @Column(length = 100)
     private String email;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<MatchUser> matchUsers = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Shorts> shortsList = new ArrayList<>();
 
     /**
      * 생성자
