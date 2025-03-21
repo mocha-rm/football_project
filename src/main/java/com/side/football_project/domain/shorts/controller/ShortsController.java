@@ -5,6 +5,7 @@ import com.side.football_project.domain.shorts.dto.ShortsResponseDto;
 import com.side.football_project.domain.shorts.service.ShortsService;
 import com.side.football_project.global.common.service.S3Service;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,8 +19,9 @@ public class ShortsController {
 
     /**
      * 숏츠 생성
-     * @param file 숏츠 파일
-     * @param title 숏츠 제목
+     *
+     * @param file        숏츠 파일
+     * @param title       숏츠 제목
      * @param description 숏츠 설명
      * @return 생성된 숏츠의 정보 {@link ShortsResponseDto}
      */
@@ -34,6 +36,7 @@ public class ShortsController {
 
     /**
      * 숏츠 조회
+     *
      * @param shortsId 숏츠 ID
      * @return 숏츠 정보
      */
@@ -43,8 +46,21 @@ public class ShortsController {
     }
 
     /**
+     * 숏츠 피드 조회 (무한 스크롤용)
+     *
+     * @return 숏츠 리스트
+     */
+    @GetMapping("/feed")
+    public ResponseEntity<Page<ShortsResponseDto>> findShortsFeed(@RequestParam(defaultValue = "0") int page,
+                                                                  @RequestParam(defaultValue = "10") int size) {
+        Page<ShortsResponseDto> shorts = shortsService.findShortsFeed(page, size);
+        return ResponseEntity.ok(shorts);
+    }
+
+    /**
      * 숏츠 수정
-     * @param shortsId 숏츠 ID
+     *
+     * @param shortsId   숏츠 ID
      * @param requestDto 숏츠 수정에 필요한 정보 {@link ShortsRequestDto}
      * @return 수정된 숏츠의 정보
      */
@@ -56,6 +72,7 @@ public class ShortsController {
 
     /**
      * 숏츠 삭제
+     *
      * @param shortsId 숏츠 ID
      */
     @DeleteMapping("/{shortsId}")
