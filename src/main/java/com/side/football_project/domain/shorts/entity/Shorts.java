@@ -1,10 +1,8 @@
 package com.side.football_project.domain.shorts.entity;
 
+import com.side.football_project.domain.user.entity.User;
 import com.side.football_project.global.common.entity.BaseEntity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,14 +24,19 @@ public class Shorts extends BaseEntity {
 
     private String url;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
     /**
      * 생성자
      */
     @Builder
-    public Shorts(String title, String description, String url) {
+    public Shorts(String title, String description, String url, User user) {
         this.title = title;
         this.description = description;
         this.url = url;
+        this.user = user;
     }
 
     public void updateShorts(String title, String description) {
