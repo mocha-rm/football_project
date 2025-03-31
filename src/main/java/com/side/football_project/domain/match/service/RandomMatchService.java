@@ -6,6 +6,7 @@ import com.side.football_project.domain.reservation.repository.ReservationReposi
 import com.side.football_project.domain.reservation.service.ReservationService;
 import com.side.football_project.domain.stadium.entity.Stadium;
 import com.side.football_project.domain.stadium.service.StadiumService;
+import com.side.football_project.domain.stadium.service.StadiumServiceImpl;
 import com.side.football_project.domain.user.entity.User;
 import com.side.football_project.domain.user.service.UserService;
 import com.side.football_project.domain.user.type.UserTier;
