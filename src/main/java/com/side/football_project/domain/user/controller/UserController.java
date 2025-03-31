@@ -65,7 +65,7 @@ public class UserController {
      * @param userId 유저 ID
      * @return 티어 업데이트 완료 메시지
      */
-    @PatchMapping("/users/{userId}/tier")
+    @PatchMapping("/{userId}/tier")
     public ResponseEntity<String> updateTier(@PathVariable Long userId) {
         userService.updateUserTier(userId);
         return ResponseEntity.ok("유저 티어가 업데이트 되었습니다.");
